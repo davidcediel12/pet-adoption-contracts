@@ -1,0 +1,35 @@
+{
+  "id" : "6e31739d-6869-4fb2-9f0d-eaa999496561",
+  "request" : {
+    "url" : "/users",
+    "method" : "POST",
+    "headers" : {
+      "Content-Type" : {
+        "equalTo" : "application/json"
+      }
+    },
+    "bodyPatterns" : [ {
+      "matchesJsonPath" : "$[?(@.['identityId'] =~ /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['name'] =~ /^\\s*\\S[\\S\\s]*/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['email'] =~ /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['country'] =~ /^\\s*\\S[\\S\\s]*/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['role'] =~ /^USER$|^FOUNDATION$/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['postalCode'] =~ /-?(\\d*\\.\\d+|\\d+)/)]"
+    } ]
+  },
+  "response" : {
+    "status" : 201,
+    "body" : "{\"id\":1,\"createdAt\":\"2024-09-13T13:04:38.724359400+02:00\"}",
+    "headers" : {
+      "Content-Type" : "application/json",
+      "Location" : "/users/1"
+    },
+    "transformers" : [ "response-template", "spring-cloud-contract" ]
+  },
+  "uuid" : "6e31739d-6869-4fb2-9f0d-eaa999496561"
+}
